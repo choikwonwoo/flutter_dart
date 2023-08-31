@@ -1,0 +1,44 @@
+# 다트언어란?
+
+### 플러터 덕분에 떠오른 다트
+
+- 크로스 플렛폼에 기반을 두고 있는 언어이다. 구글이 플러터를 개발하는 언어로 선택하였다.
+
+### 다트 파일의 구성요소
+
+- 다트 파일은 톱 레벨에 프로그램의 구성 요소인 변수와 함수, 클래스를 선언한다.
+- 자바처럼 객체지향 프로그래밍에 목적을 둔 언어는 톱 레벨에 클래스만을 작성할 수 있다.
+- 자바는 함수와 변수를 클래스 내부에 선언 해야 하지만 다트는 그러지 않아도 된다.
+
+```dart
+int no = 10;
+
+void sayHi(){
+	print('hi',$no);
+}
+
+class User(){
+	int no = 10;
+	void sayHi(){
+		print('hi',$no);
+	}
+}
+```
+
+### 다트 엔진의 라이브러리
+
+- 다트 파일은 많은 외부 파일을 이용하는데 이는 미리 구현된 기능이 있는 라이브러리와 패키지를 이용할 수 있다.
+- 라이브러리 종류
+    - dart:async → 비동기 프로그램
+    - dart:collection → LinkedList, hashMap 등 집합 데이터
+    - dart:convert → json 과 같은 데이터의 인코딩과 디코딩
+    - dart:core → 내장 타입, 컬렉션
+    - dart:developer → 디버거나 인스펙터 등 개발자 도구
+    - dart:math → 수학 함수
+    - dart:io → 파일, 소켓, http에서 발생하는 입출력
+    - dart:isolate → 동시성 프로그래밍
+    - dart:html → html 요소
+    - dart:indexed_db → 키 값 형태의 데이터 저장
+    - dart:web_audio → 오디오 핸들링
+    - dart:web_gl → 3d그래픽
+    - dart:web_sql →sql 기반 데이터 저장
