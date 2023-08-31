@@ -1,0 +1,149 @@
+# 함수
+
+### 함수 선언의 위치
+
+- 톱 레벨과 클래스의 멤버 그리고 다른 함수 내에 선언 가능하다
+- 또한 다트에서는 함수 오버로딩을 제공하지 않는다.
+- var 타입으로 매개변수를 선언할 수 있지만 다이나믹 타입으로 변경된다.
+- 매개변수 타입을 생략하면 역시 다이나믹 타입이다.
+
+```dart
+void some1(int? a){
+}
+void some2(var a){
+}
+void some3(a){
+}
+```
+
+### 함수 타입 반환
+
+- 함수의 반환 타입은 없으면 void 생략하면 dynamic 이 된다.
+- 반환 값이 dynamic 인 경우 return 문을 생략하면 null 반환
+
+### 화살표 함수
+
+- 함수의 본문이 한줄인 경우 ⇒를 사용하여 표현할 수도 있다.
+
+### 명명된 매개변수
+
+- 다트에서는 매개변수를 선택적으로 지정하는 옵셔널을 지원한다.
+- 2가지의 방법 중 하나인 명명된 매개변수는 데이터를 전달 할 때 이름: 값 의 형태로 전달해야한다.
+
+```dart
+void some({String? : data}){
+}
+main(){
+	some(data:'요로케');
+}
+```
+
+- 명명된 매개변수는 {} 로 묶어서 선언한다
+- 여러 매개변수를 중괄호로 묶어 명명된 매개변수로 선언 가능하다.
+- 한 함수에서 명명된 매개변수는 한 번만 선언 가능하며 순서상 마지막에 선언 해야한다.
+- 명명된 매개변수는 기본값을 설정할 수 있다
+- required 예약어를 사용하여 강제할 수 있다.
+
+```dart
+void some1(int? a,{String? data2,bool? data3}){
+}
+void some2(int? a,{String? data2,bool? data3 = false}){
+}
+void some3({required String? data2,bool? data3}){
+}
+```
+
+- 명명된 매개변수에 데이터를 전달하지 않아도 된다.
+- 데이터를 전달하려면 반드시 이름을 명시해야 한다
+- 명명된 매개변수에 데이터를 전달할 때 선언된 순서와 맞지 않아도 된다.
+
+### 옵셔널 위치 매개변수
+
+- 이름으로 전달하는 것이 아닌 순서로 전달한다.
+- 마찬가지로 값을 전달하지 않아도 된다. 순서는 맞춰야 한다
+- 매개변수들을 대괄호로 묶는다
+- 함수의 마지막 매개변수만 사용한다
+- 매개변수에 기본인자 설정 가능하다.
+- 매개변수 이름은 생략한다
+- 매개변수가 선언된 순서에 따라 값이 할당된다.
+
+```dart
+void some1(int? 2,[String arg2="hi",int a = 10]){
+}
+```
+
+### 함수 타입 인수
+
+- 함수를 대입할 수 있는 객체를 함수 타입이라고 한다
+- Function 예약어를 사용하여 선언한다
+
+```dart
+void some(){
+}
+Function f = some;
+```
+
+```dart
+int plus(int no){
+	return no+10;
+}
+int mul(int no){
+	return no*10;
+}
+Fuction test(Function f){
+	return mul;
+}
+main(){
+	var result = test(plus);
+	print('result = ${result(30)}')
+// 결과 = 30 ->200
+}
+```
+
+- 함수 타입 제한
+
+```dart
+some(int f(int a)){
+	f(30);
+}
+
+main(){
+	some((int a){
+	return a+20;})
+}
+```
+
+### 익명 함수
+
+- 람다 함수를 의미한다
+
+```dart
+fun1(arg){
+	return 10;
+}
+Function fun2 = (arg){
+	return 10;
+};
+```
+
+### 게터와 세터 함수
+
+- 어떤 데이터를 가져오거나 변경하는 함수를 의미한다.
+- get과 set의 예약어를 사용한다
+
+```dart
+String _name = 'hi';
+
+String get name{
+	return _name.toUpperCase();
+}
+set name(value){
+	_name = value;
+}
+main(){
+	name = "hello"
+// 게터와 세터는 함수지만 변수처럼 이용한다.
+}
+```
+
+- 만약 게터만 설정하면 값을 읽기만 할 뿐 바꿀 수 없다.

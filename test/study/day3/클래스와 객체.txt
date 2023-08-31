@@ -1,0 +1,97 @@
+# 클래스와 객체
+
+### 클래스 선언과 생성
+
+- Class 예약어로 선언한다. 변수와 함수를 멤버로 선언할 수 있다.
+- new 연산자를 사용해도 안해도 된다.
+- 접근 방법은 다름이 없다.
+- 자바와 마찬가지로 static으로 선언할 경우 클래스 이름으로 접근이 가능하다.
+- 기본적으로 생성자도 자바와 같다.
+- 생성자를 선언할 때 다음과 같이 초기화 목록을 만들어 생성할 수 있다.
+
+```dart
+User(String name, int age) : this.name = name, this.age = age{}
+```
+
+- 다음과 같이 리스트를 곁들여 자주 사용한다
+
+```dart
+User(List<int> arg) : this.data1 = arg[0], this.data2 = arg[1]{}
+```
+
+- 또한 함수를 곁들여 사용할 수 있다.
+
+```dart
+User(List<int> arg) : this.data1 = some(arg[0]), this.data2 = arg[1]{}
+// 단 이곳에서 사용할 함수는 static 함수여야 한다.
+```
+
+### 명명된 생성자
+
+- 다트에서의 오버로딩은 불가 따라서 다음과 같이 선언한다.
+
+```dart
+class MyClass{
+	MyClass(){}
+	MyClass.first(){}
+	MyClass.second(){}
+}
+```
+
+- 중복되는 생성자를 호출할 경우
+
+```dart
+class MyClass{
+	MyClass(int data1, int data2){}
+	MyClass.first(int arg):this(arg,0);
+	// 중복 생성자를 호출 하는 경우 바디를 사용하지 못함.
+	// 또한 오직 this만 사용가능항
+}
+```
+
+### 팩토리 생성자
+
+- 생성자 처럼 쓰이지만 클래스 타입의 객체를 반환하는 함수 이다.
+- 따라서 적절한 객체를 준비해서 반환해 주어야 한다. 그렇기에 다른 생성자와 함께 쓰인다.
+
+```dart
+class MyClass{
+	MyClass._instance();
+	factory MyClass(){
+		return MyClass._instance();
+	}
+}
+```
+
+- 이를 응용하여 싱글톤 같은 캐쉬 알고리즘을 구현한다.
+
+```dart
+class Image{
+	late String url;
+	static Map<String, Image> _cache = <String, Image>{};
+	Image._instance(this.url);
+	factory Image(String url){
+		if(_chach[url] == null){
+			var obj = Image._instance(url)
+			_cache[url] = obj;
+		}
+		return _cache[url];
+	}
+}
+```
+
+### 상수 생성자
+
+- const 예약어로 생성자를 선언하며 본문을 가질 수 없다.
+- 상수 생성자를 가진 클래스의 모든 멤버 변수는 final로 선언해야한다.
+
+```dart
+class MyClass{
+	final int data1;
+	const MyClass(this.data1)
+}
+```
+
+- 상수 생성자를 가진 클래스는 const를 사용해서 상수 객체를 생성할 수 있다.
+- 상수 생성자를 가진 클래스도 서로 다른 객체를 생성한다.
+- const를 붙여 상수 객체로 선언하면 초기값이 같으면 객체를 다시 생성하지 않고 이전 값으로 생성한다. 그러나 값이 다르다면 역시 다른 객체를 만든다 또한 하나는 const 다른 하나는 const를 붙이지 않는다면 역시 서로 다른 객체를 생성한다.

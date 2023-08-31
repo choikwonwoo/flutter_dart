@@ -1,0 +1,71 @@
+# 흐름 제어
+
+### for 반복문 in
+
+- 일반적으로 for문은 자바와 같다.
+- in을 사용할 수 있다.
+
+```dart
+main(){
+	for(int i = 0; i < 10; i++){
+	}
+	for(var i in list){
+	}
+}
+```
+
+### switch~case 선택문
+
+- break
+- continue
+- return
+- throw
+- 중 하나는 무조건 사용해야 한다. 그렇지 않으면 에러가 발생한다.
+
+```dart
+some(arg){
+	switch(arg){
+		case 'a':
+			print(${a});
+			break;
+		case 'b' :
+			print(b);
+	}
+}
+```
+
+### 예외 던지기와 예외 처리
+
+- throw를 사용하여 예외를 던진다.
+
+```dart
+some(){
+	throw Exception('my exception');
+	throw 'exception'
+	throw User();
+// 둘다 가능 위에는 Exception클래스에 던지기 아래는 예외 발생시 문자열 출력.
+// + 객체 던지기도 가능
+}
+```
+
+### try on finally
+
+```dart
+some(){
+	throw FromatException("erorr");
+}
+try{
+	print(1);
+	some();
+	print(2);
+} on FromatException catch(e){
+	print("$e");
+} on Exception catch(e){
+	print(e);
+} finally{
+	print(4)
+}
+print(5)
+```
+
+- 위의 코드는 1 출력 이후 some 함수의 예외에 의해 FormatException 로 넘어가 객체를 받아와 반환한다. 즉 erorr문자열 출력 이후 finally 구문과 이후에 5를 출력한다.
